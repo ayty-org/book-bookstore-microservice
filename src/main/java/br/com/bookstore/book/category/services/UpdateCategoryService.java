@@ -3,7 +3,7 @@ package br.com.bookstore.book.category.services;
 import br.com.bookstore.book.category.Category;
 
 @FunctionalInterface
-public interface SaveCategoryService {
+public interface UpdateCategoryService {
 
-    void insert(Category category);
+    void update(Category category, Long id);
 }
