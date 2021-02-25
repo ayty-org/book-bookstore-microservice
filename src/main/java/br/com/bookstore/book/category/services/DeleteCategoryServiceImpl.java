@@ -1,7 +1,6 @@
 package br.com.bookstore.book.category.services;
 
 import br.com.bookstore.book.category.CategoryRepository;
-import br.com.bookstore.book.category.services.DeleteCategoryService;
 import br.com.bookstore.book.exceptions.CategoryNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
