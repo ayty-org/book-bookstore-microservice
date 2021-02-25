@@ -26,4 +26,12 @@ public class Category implements Serializable {
     private Long id;
 
     private String name;
+
+    public static Category to(CategoryDTO dto) {
+        return Category
+                .builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .build();
+    }
 }
