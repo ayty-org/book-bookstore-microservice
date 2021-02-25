@@ -1,0 +1,25 @@
+server:
+  port: 9092
+#Eureka
+eureka:
+  instance:
+    hostname: localhost
+    secure-port: 9091
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url: http://${eureka.instance.hostname}:${eureka.instance.secure-port}/eureka/
+    eureka-server-connect-timeout-seconds: 3000
+
+#JPA properties
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookstore?createDatabaseIfNotExist=true&useSSL=true
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database: postgresql
