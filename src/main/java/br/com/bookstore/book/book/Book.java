@@ -42,6 +42,4 @@ public class Book implements Serializable {
     private int quantityAvailable;
 
     private UUID specificID = UUID.randomUUID();
-
-    private UUID purchaseID = UUID.randomUUID();
 }

@@ -1,23 +1,19 @@
-server:
-  port: 9092
 #Eureka
 eureka:
   instance:
     hostname: localhost
-    secure-port: 9091
+    secure-port: 8761
   client:
     register-with-eureka: true
-    fetch-registry: true
-    service-url: http://${eureka.instance.hostname}:${eureka.instance.secure-port}/eureka/
+    fetch-registry: false
     eureka-server-connect-timeout-seconds: 3000
-
 #JPA properties
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bookstore?createDatabaseIfNotExist=true&useSSL=true
+    url: jdbc:postgresql://tuffi.db.elephantsql.com:5432/goqhhfqc?createDatabaseIfNotExist=true&useSSL=true
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: root
+    username: goqhhfqc
+    password: Knif03MfU6MPHg6ScuQHHyzQpgXO1HgO
   jpa:
     hibernate:
       ddl-auto: create
