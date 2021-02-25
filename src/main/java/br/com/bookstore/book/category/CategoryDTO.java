@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class CategoryDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String name;
 
     public static CategoryDTO from(Category entity) {
