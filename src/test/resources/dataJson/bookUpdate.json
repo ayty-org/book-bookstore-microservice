@@ -1,0 +1,11 @@
+
+{
+  "title": "Lord of Rings",
+  "sinopse": "Frodo é um mala, Sam és grande",
+  "autor": "JRR TOKEN",
+  "isbn": "978-3-17-141591-8",
+  "yearOfPublication": "2021-02-11",
+  "sellPrice": 10.0,
+  "quantityAvailable": 2,
+  "categories": [{"id":2}]
+}
