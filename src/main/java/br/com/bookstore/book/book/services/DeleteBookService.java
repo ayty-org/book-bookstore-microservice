@@ -1,2 +1,6 @@
-package br.com.bookstore.book.book.services;public interface DeleteBookService {
+package br.com.bookstore.book.book.services;
+
+@FunctionalInterface
+public interface DeleteBookService {
+    void delete(Long id);
 }
