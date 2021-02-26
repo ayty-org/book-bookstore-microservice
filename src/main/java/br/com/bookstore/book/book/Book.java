@@ -51,6 +51,7 @@ public class Book implements Serializable {
     @PrimaryKeyJoinColumn
     private Set<Category> categories = new HashSet<>();
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID specificID = UUID.randomUUID();
 
     public static Book to(BookDTO dto) {
@@ -65,6 +66,7 @@ public class Book implements Serializable {
                 .sellPrice(dto.getSellPrice())
                 .quantityAvailable(dto.getQuantityAvailable())
                 .categories(dto.getCategories())
+                .specificID(dto.getSpecificID())
                 .build();
     }
 }
