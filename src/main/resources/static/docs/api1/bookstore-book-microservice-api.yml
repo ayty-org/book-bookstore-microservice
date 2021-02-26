@@ -1,0 +1,413 @@
+#informações da api
+openapi: 3.0.1
+info:
+  description: "📚 Microservice Book to api Bookstore management system made with SpringBoot. 💳 Phoebus @paystore
+    training project in partnership with @ayty-org"
+  version: "1.0.0"
+  title: "Book-Store: livraria"
+  contact:
+    email: "josinaldo.pontes@phoebustecnologia.com.br"
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: "book-controller"
+    description: "All about books in book store"
+  - name: "category-controller"
+    description: "All about category of book in book store"
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+
+servers:
+  - url: https://localhost:8080
+  - url: http://localhost:8080/v3/docs
+
+paths:
+  /v1/api/book/{id}:
+    get:
+      tags:
+        - book-controller
+      operationId: find_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDTO'
+    put:
+      tags:
+        - book-controller
+      operationId: update_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDTO'
+        required: true
+      responses:
+        "204":
+          description: No Content
+    delete:
+      tags:
+        - book-controller
+      operationId: delete_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: No Content
+  /v1/api/book/category/{id}:
+    get:
+      tags:
+        - category-controller
+      operationId: find_3
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDTO'
+    put:
+      tags:
+        - category-controller
+      operationId: update_3
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryDTO'
+        required: true
+      responses:
+        "204":
+          description: No Content
+    delete:
+      tags:
+        - category-controller
+      operationId: delete_3
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: No Content
+  /v1/api/book:
+    get:
+      tags:
+        - book-controller
+      operationId: findAll_2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDTO'
+    post:
+      tags:
+        - book-controller
+      operationId: insert_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+  /v1/api/book/category:
+    get:
+      tags:
+        - category-controller
+      operationId: findAll_3
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryDTO'
+    post:
+      tags:
+        - category-controller
+      operationId: insert_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryDTO'
+        required: true
+      responses:
+        "201":
+          description: Created
+  /v1/api/book/categoryname/{categoryName}:
+    get:
+      tags:
+        - book-controller
+      operationId: findAllBooksByCategoryName
+      parameters:
+        - name: categoryName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDTO'
+  /v1/api/book/category/:
+    get:
+      tags:
+        - category-controller
+      operationId: findPage_2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageCategoryDTO'
+  /v1/api/book/:
+    get:
+      tags:
+        - book-controller
+      operationId: findPage_3
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageBookDTO'
+components:
+  schemas:
+    ClientDTO:
+      required:
+        - age
+        - email
+        - name
+        - phone
+        - sexo
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        age:
+          minimum: 2
+          type: integer
+          format: int32
+        phone:
+          type: string
+        email:
+          type: string
+        sexo:
+          type: string
+          enum:
+            - MASCULINO
+            - FEMININO
+            - OUTRO
+    BookDTO:
+      required:
+        - autor
+        - isbn
+        - quantityAvailable
+        - sellPrice
+        - title
+        - yearOfPublication
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        sinopse:
+          maxLength: 500
+          minLength: 0
+          type: string
+        autor:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        isbn:
+          maxLength: 17
+          minLength: 17
+          type: string
+        yearOfPublication:
+          type: string
+          format: date
+        sellPrice:
+          minimum: 0.00
+          exclusiveMinimum: false
+          type: number
+          format: double
+        quantityAvailable:
+          minimum: 0
+          type: integer
+          format: int32
+        categories:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    CategoryDTO:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Pageable:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+        offset:
+          type: integer
+          format: int64
+    Sort:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
+    PageCategoryDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryDTO'
+        empty:
+          type: boolean
+    PageBookDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookDTO'
+        empty:
+          type: boolean
