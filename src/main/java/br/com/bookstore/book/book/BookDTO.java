@@ -58,7 +58,7 @@ public class BookDTO {
     private int quantityAvailable;
 
     @NotNull
-    private UUID specificID = UUID.randomUUID();
+    private String specificID = UUID.randomUUID().toString();
 
     @NotNull
     private Set<Category> categories = new HashSet<>();
