@@ -52,7 +52,7 @@ public class Book implements Serializable {
     private Set<Category> categories = new HashSet<>();
 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID specificID = UUID.randomUUID();
+    private String specificID = UUID.randomUUID().toString();
 
     public static Book to(BookDTO dto) {
         return Book
