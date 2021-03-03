@@ -4,6 +4,7 @@ import br.com.bookstore.book.book.Book;
 import br.com.bookstore.book.book.BookDTO;
 import br.com.bookstore.book.book.services.DeleteBookService;
 import br.com.bookstore.book.book.services.GetBookService;
+import br.com.bookstore.book.book.services.GetSpecificIdBookService;
 import br.com.bookstore.book.book.services.ListBookByCategoryService;
 import br.com.bookstore.book.book.services.ListBookService;
 import br.com.bookstore.book.book.services.ListPageBookService;
@@ -32,6 +33,7 @@ import java.util.List;
 public class BookControllerV1 {
 
     private final GetBookService getBookService;
+    private final GetSpecificIdBookService getSpecificIdBookService;
     private final ListBookService listBookService;
     private final ListBookByCategoryService listBookByCategoryService;
     private final ListPageBookService listPageBookService;
@@ -42,6 +44,11 @@ public class BookControllerV1 {
     @GetMapping(value = "/{id}") //list book by id
     public BookDTO find(@PathVariable Long id) {
         return BookDTO.from(getBookService.findById(id));
+    }
+
+    @GetMapping(value = "/id/{specificID}") //list client by id
+    public BookDTO findSpecificID(@PathVariable String specificID) {
+        return BookDTO.from(getSpecificIdBookService.findBySpecificID(specificID));
     }
 
     @GetMapping//list all book
