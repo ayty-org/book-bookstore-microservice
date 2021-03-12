@@ -25,8 +25,6 @@ public class UpdateBookServiceImpl implements UpdateBookService {
             throw new BookAlreadyIsbnExistException();
         }
 
-        System.out.println(existsByIsbnAndId);
-
         bookSaved.setAuthor(bookDTO.getAuthor());
         bookSaved.setCategories(bookDTO.getCategories());
         bookSaved.setIsbn(bookDTO.getIsbn());
