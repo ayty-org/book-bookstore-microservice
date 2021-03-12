@@ -19,6 +19,14 @@ public class UpdateBookServiceImpl implements UpdateBookService {
 
         Book bookSaved = bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
 
+        Boolean existsByIsbnAndId = bookRepository.existsByIsbnAndId(bookSaved.getIsbn(), id);
+
+        if(existsByIsbnAndId){
+            throw new BookAlreadyIsbnExistException();
+        }
+
+        System.out.println(existsByIsbnAndId);
+
         bookSaved.setAuthor(bookDTO.getAuthor());
         bookSaved.setCategories(bookDTO.getCategories());
         bookSaved.setIsbn(bookDTO.getIsbn());
@@ -28,9 +36,6 @@ public class UpdateBookServiceImpl implements UpdateBookService {
         bookSaved.setTitle(bookDTO.getTitle());
         bookSaved.setYearOfPublication(bookDTO.getYearOfPublication());
 
-       if(bookRepository.existsByIsbnAndIdNot(bookDTO.getIsbn(), id)){
-           throw new BookAlreadyIsbnExistException();
-       }
         bookRepository.save(bookSaved);
     }
 }
