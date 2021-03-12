@@ -4,6 +4,7 @@ import br.com.bookstore.book.book.Book;
 import br.com.bookstore.book.book.BookDTO;
 import br.com.bookstore.book.book.services.DeleteBookService;
 import br.com.bookstore.book.book.services.GetBookService;
+import br.com.bookstore.book.book.services.GetSpecificIdBookService;
 import br.com.bookstore.book.book.services.ListBookByCategoryService;
 import br.com.bookstore.book.book.services.ListBookService;
 import br.com.bookstore.book.book.services.ListPageBookService;
@@ -32,6 +33,7 @@ import java.util.List;
 public class BookControllerV1 {
 
     private final GetBookService getBookService;
+    private final GetSpecificIdBookService getSpecificIdBookService;
     private final ListBookService listBookService;
     private final ListBookByCategoryService listBookByCategoryService;
     private final ListPageBookService listPageBookService;
@@ -44,7 +46,12 @@ public class BookControllerV1 {
         return BookDTO.from(getBookService.findById(id));
     }
 
-    @GetMapping//list all book
+    @GetMapping(value = "/id/{specificID}") //list client by id
+    public BookDTO findSpecificID(@PathVariable String specificID) {
+        return BookDTO.from(getSpecificIdBookService.findBySpecificID(specificID));
+    }
+
+    @GetMapping(value = "/all")//list all book
     public List<BookDTO> findAll(){
         return BookDTO.fromAll(listBookService.findAll());
     }
@@ -54,7 +61,7 @@ public class BookControllerV1 {
         return BookDTO.fromAll(listBookByCategoryService.findAllBooksByCategoryName(categoryName));
     }
 
-    @GetMapping(path = {"/"}) //list all book inside object page
+    @GetMapping//list all book inside object page
     public Page<BookDTO> findPage(Pageable pageable) {
         return BookDTO.fromPage(listPageBookService.findPage(pageable));
     }

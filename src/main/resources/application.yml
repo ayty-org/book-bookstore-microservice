@@ -9,6 +9,8 @@ eureka:
     eureka-server-connect-timeout-seconds: 3000
 #JPA properties
 spring:
+  application:
+    name: book-service
   datasource:
     schema: classpath:/db/migration/schema
     url: jdbc:postgresql://tuffi.db.elephantsql.com:5432/goqhhfqc?createDatabaseIfNotExist=true&useSSL=true

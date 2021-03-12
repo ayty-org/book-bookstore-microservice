@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the services responsible for pagination of all books")
+@DisplayName("Valida a funcionalidade dos serviços responsáveis pela paginação de todos os livros")
 class ListPageBookServiceTest {
 
     @Mock
@@ -41,7 +41,7 @@ class ListPageBookServiceTest {
     }
 
     @Test
-    @DisplayName("listAll returns list of Book inside page object when successful")
+    @DisplayName("listAll retorna a lista do livro dentro do objeto da página quando bem-sucedido")
     void listAllReturnsListOfBookInsidePageObjectWhenSuccessful() {
 
         Category categoryTest = new Category(1L,"Aventura");
@@ -61,9 +61,9 @@ class ListPageBookServiceTest {
                 ()-> assertThat(result.getTotalPages(), is(1)),
                 ()-> assertThat(result.getSize(), is(1)),
                 ()-> assertThat(result.getContent().get(0).getTitle(), is("O Pequeno Príncipe")),
-                ()-> assertThat(result.getContent().get(0).getSinopse(), is("O Pequeno Príncipe representa a espontaneidade.")),
+                ()-> assertThat(result.getContent().get(0).getSynopsis(), is("O Pequeno Príncipe representa a espontaneidade.")),
                 ()-> assertThat(result.getContent().get(0).getIsbn(), is("978-3-16-148410-0")),
-                ()-> assertThat(result.getContent().get(0).getAutor(), is("Antoine de Saint")),
+                ()-> assertThat(result.getContent().get(0).getAuthor(), is("Antoine de Saint")),
                 ()-> assertThat(result.getContent().get(0).getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.getContent().get(0).getSellPrice(), is(10.00)),
                 ()-> assertThat(result.getContent().get(0).getQuantityAvailable(), is(2)),
