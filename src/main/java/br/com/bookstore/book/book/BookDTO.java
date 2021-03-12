@@ -9,8 +9,6 @@ import lombok.Setter;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -35,11 +33,11 @@ public class BookDTO {
 
     @Size(max = 500)
     @NotNull
-    private String sinopse;
+    private String synopsis;
 
     @Size(min = 1)
     @NotNull
-    private String autor;
+    private String author;
 
     @Size(min = 17, max = 17, message = "ISBN must contain 17 characters" + "\n Ex.: 978-3-16-148410-0")
     @NotNull(message = "ISBN cannot be null")
@@ -57,8 +55,7 @@ public class BookDTO {
     @Min(0)
     private int quantityAvailable;
 
-    @NotNull
-    private String specificID = UUID.randomUUID().toString();
+    private String specificID;
 
     @NotNull
     private Set<Category> categories = new HashSet<>();
@@ -68,8 +65,8 @@ public class BookDTO {
                 .builder()
                 .id(entity.getId())
                 .title(entity.getTitle())
-                .sinopse(entity.getSinopse())
-                .autor(entity.getAutor())
+                .synopsis(entity.getSynopsis())
+                .author(entity.getAuthor())
                 .isbn(entity.getIsbn())
                 .yearOfPublication(entity.getYearOfPublication())
                 .sellPrice(entity.getSellPrice())

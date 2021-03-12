@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the services responsible for save book")
+@DisplayName("Valida a funcionalidade dos serviços responsáveis por salvar livro")
 class SaveBookServiceTest {
 
     @Mock
@@ -37,7 +37,7 @@ class SaveBookServiceTest {
     }
 
     @Test
-    @DisplayName("save returns book when successful")
+    @DisplayName("salvar livro de devoluções quando bem-sucedido")
     void saveReturnsBookWhenSuccessful() {
 
         Book book = createBook().build();
@@ -52,9 +52,9 @@ class SaveBookServiceTest {
         //verification
         assertAll("Book",
                 ()-> assertThat(result.getTitle(), is("O Pequeno Príncipe")),
-                ()-> assertThat(result.getSinopse(), is("O Pequeno Príncipe representa a espontaneidade.")),
+                ()-> assertThat(result.getSynopsis(), is("O Pequeno Príncipe representa a espontaneidade.")),
                 ()-> assertThat(result.getIsbn(), is("978-3-16-148410-0")),
-                ()-> assertThat(result.getAutor(), is("Antoine de Saint")),
+                ()-> assertThat(result.getAuthor(), is("Antoine de Saint")),
                 ()-> assertThat(result.getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.getSellPrice(), is(10.00)),
                 ()-> assertThat(result.getQuantityAvailable(), is(2)),

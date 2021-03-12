@@ -51,7 +51,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Tag("Controller")
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BookControllerV1.class)
-@DisplayName("Validates the functionality of the controller responsible of book")
+@DisplayName("Valida a funcionalidade do controller responsável do livro")
 class BookControllerV1Test {
 
     private final String URL_BOOK = "/v1/api/book";
@@ -84,7 +84,7 @@ class BookControllerV1Test {
     private UpdateBookService updateBookService;
 
     @Test
-    @DisplayName("findById return book when succesful")
+    @DisplayName("findById retorna livro quando sucesso")
     void findByIdReturnBookWhenSuccessful() throws Exception{
 
         when(getBookService.findById(anyLong())).thenReturn(createBook().build());
@@ -107,7 +107,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("findById throws BookNotFoundException when book is not found")
+    @DisplayName("findById lança BookNotFoundException quando livro não é encontrado")
     void findByIdBookThrowBookNotFoundExceptionWhenBookNotFound() throws Exception {
 
         when(getBookService.findById(anyLong())).thenThrow(new BookNotFoundException());
@@ -120,7 +120,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("listAll returns list of book when successful")
+    @DisplayName("listAll retorna lista de livros quando sucesso")
     void listAllReturnsListOfBookWhenSuccessfull() throws Exception {
 
         when(listBookService.findAll()).thenReturn(Lists.newArrayList(
@@ -157,7 +157,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("listAll returns list of book inside page object when successful")
+    @DisplayName("listAll retorna a lista do livro dentro do objeto da página quando bem-sucedido")
     void listAllReturnsListOfBookInsidePageObject_WhenSuccessful() throws Exception{
 
         Page<Book> bookPage = new PageImpl<>(Collections.singletonList(createBook().id(1L).build()));
@@ -184,7 +184,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("listAll returns list of book by categories when successful")
+    @DisplayName("listAll retorna lista de livro por categoria quando bem-sucessido")
     void listAllByCategoryReturnsListOfBookWhenSuccessful() throws Exception {
         Category categoryOfBook = new Category(1L,"Aventura");
 
@@ -210,7 +210,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("save returns book when successful")
+    @DisplayName("save cria o livro quando bem sucessido e retorna created")
     void saveReturnsBookWhenSuccessful() throws Exception{
 
         mockMvc.perform(post(URL_BOOK)
@@ -223,7 +223,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("save throws book when title is null")
+    @DisplayName("save lança falha na requisição quando titulo do livro é nulo")
     void saveThrowBadRequestWhenTitleIsNull() throws Exception{
 
         Book book = createBook().id(1L).title(null).build();
@@ -237,10 +237,10 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("save throws book when sinopse is null")
+    @DisplayName("save lança falha na requisição quando sinopse do livro é nula")
     void saveThrowBadRequestWhenSinopseIsNull() throws Exception{
 
-        Book book = createBook().id(1L).sinopse(null).build();
+        Book book = createBook().id(1L).synopsis(null).build();
         mockMvc.perform(post(URL_BOOK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(book)))
@@ -251,10 +251,10 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("save throws book when autor is null")
+    @DisplayName("save lança falha na requisição quando autor do livro é nulo")
     void saveThrowBadRequestWhenAutorIsNull() throws Exception{
 
-        Book book = createBook().id(1L).autor(null).build();
+        Book book = createBook().id(1L).author(null).build();
         mockMvc.perform(post(URL_BOOK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(book)))
@@ -265,7 +265,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("save throws book when isbn is null")
+    @DisplayName("save lança falha na requisição quando isbn é nulo")
     void saveThrowBadRequestWhenIsbnIsNull() throws Exception{
 
         Book book = createBook().id(1L).isbn(null).build();
@@ -279,7 +279,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("save throws book when sel price is negative")
+    @DisplayName("save lança falha na requisição quando preço de venda é negativo")
     void saveThrowBadRequestWhenSellPriceIsNegative() throws Exception{
 
         Book book = createBook().id(1L).sellPrice(-1).build();
@@ -293,7 +293,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("save throws book when yearOfPublication is null")
+    @DisplayName("save lança falha na requisição quando ano de publicação é nulo")
     void saveThrowBadRequestWhenYearOfPublicationIsNull() throws Exception{
 
         Book book = createBook().id(1L).yearOfPublication(null).build();
@@ -307,7 +307,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("update book when successful")
+    @DisplayName("atualiza livro quando bem-sucedido")
     void updateReturnsBookUpdateWhenSuccessful() throws Exception{
         mockMvc.perform(put(URL_BOOK + "/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -319,7 +319,7 @@ class BookControllerV1Test {
     }
 
     @Test
-    @DisplayName("delete remove books when successful")
+    @DisplayName("delete remove livros quando bem-sucessido")
     void deleteRemoveBookWhenSuccessful() throws Exception{
         mockMvc.perform(delete(URL_BOOK + "/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))

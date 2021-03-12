@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the services responsible for list all book by categories")
+@DisplayName("Valida a funcionalidade dos serviços responsáveis por listar todos os livros por categorias")
 class ListBookByCategoryServiceTest {
 
     @Mock
@@ -42,7 +42,7 @@ class ListBookByCategoryServiceTest {
     }
 
     @Test
-    @DisplayName("listAll returns list of book by categories when successful")
+    @DisplayName("listAll retorna a lista de livros por categorias quando bem-sucedido")
     void listAllReturnsListOfBookWhenSuccessful() {
         Category categoryOfBookTest = new Category(1L,"Aventura");
         Set<Category> categoryOfBookSet = new HashSet<>();
@@ -57,9 +57,9 @@ class ListBookByCategoryServiceTest {
         assertAll("Book",
                 () -> assertThat(result.size(), is(1)),
                 () -> assertThat(result.get(0).getTitle(), is("Title test")),
-                ()-> assertThat(result.get(0).getSinopse(), is("O Pequeno Príncipe representa a espontaneidade.")),
+                ()-> assertThat(result.get(0).getSynopsis(), is("O Pequeno Príncipe representa a espontaneidade.")),
                 ()-> assertThat(result.get(0).getIsbn(), is("978-3-16-148410-0")),
-                ()-> assertThat(result.get(0).getAutor(), is("Antoine de Saint")),
+                ()-> assertThat(result.get(0).getAuthor(), is("Antoine de Saint")),
                 ()-> assertThat(result.get(0).getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.get(0).getSellPrice(), is(10.00)),
                 ()-> assertThat(result.get(0).getQuantityAvailable(), is(2)),
