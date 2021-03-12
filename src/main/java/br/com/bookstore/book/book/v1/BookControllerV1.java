@@ -51,7 +51,7 @@ public class BookControllerV1 {
         return BookDTO.from(getSpecificIdBookService.findBySpecificID(specificID));
     }
 
-    @GetMapping//list all book
+    @GetMapping(value = "/all")//list all book
     public List<BookDTO> findAll(){
         return BookDTO.fromAll(listBookService.findAll());
     }
@@ -61,7 +61,7 @@ public class BookControllerV1 {
         return BookDTO.fromAll(listBookByCategoryService.findAllBooksByCategoryName(categoryName));
     }
 
-    @GetMapping(path = {"/"}) //list all book inside object page
+    @GetMapping//list all book inside object page
     public Page<BookDTO> findPage(Pageable pageable) {
         return BookDTO.fromPage(listPageBookService.findPage(pageable));
     }

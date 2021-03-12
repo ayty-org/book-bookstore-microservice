@@ -18,7 +18,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -35,9 +34,9 @@ public class Book implements Serializable {
 
     private String title;
 
-    private String sinopse;
+    private String synopsis;
 
-    private String autor;
+    private String author;
 
     private String isbn;
 
@@ -50,17 +49,16 @@ public class Book implements Serializable {
     @ManyToMany(cascade = CascadeType.DETACH)
     @PrimaryKeyJoinColumn
     private Set<Category> categories = new HashSet<>();
-
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String specificID = UUID.randomUUID().toString();
+    private String specificID;
 
     public static Book to(BookDTO dto) {
         return Book
                 .builder()
                 .id(dto.getId())
                 .title(dto.getTitle())
-                .sinopse(dto.getSinopse())
-                .autor(dto.getAutor())
+                .synopsis(dto.getSynopsis())
+                .author(dto.getAuthor())
                 .isbn(dto.getIsbn())
                 .yearOfPublication(dto.getYearOfPublication())
                 .sellPrice(dto.getSellPrice())

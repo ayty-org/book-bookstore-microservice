@@ -2,6 +2,7 @@ package br.com.bookstore.book.book;
 
 import br.com.bookstore.book.book.services.UpdateBookServiceImpl;
 import br.com.bookstore.book.category.Category;
+import br.com.bookstore.book.exceptions.BookAlreadyIsbnExistException;
 import br.com.bookstore.book.exceptions.BookNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -43,7 +44,7 @@ class UpdateBookServiceTest {
     }
 
     @Test
-    @DisplayName("update book when successful")
+    @DisplayName("atualizar livro quando bem sucedido")
     void updateReturnsBookUpdateWhenSuccessful(){
 
         Book putBookRequest = createBook()
@@ -65,9 +66,9 @@ class UpdateBookServiceTest {
         //verification
         assertAll("Book",
                 ()-> assertThat(result.getTitle(), is("New Title")),
-                ()-> assertThat(result.getSinopse(), is("O Pequeno Príncipe representa a espontaneidade.")),
+                ()-> assertThat(result.getSynopsis(), is("O Pequeno Príncipe representa a espontaneidade.")),
                 ()-> assertThat(result.getIsbn(), is("978-3-16-148410-0")),
-                ()-> assertThat(result.getAutor(), is("Antoine de Saint")),
+                ()-> assertThat(result.getAuthor(), is("Antoine de Saint")),
                 ()-> assertThat(result.getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.getSellPrice(), is(10.00)),
                 ()-> assertThat(result.getQuantityAvailable(), is(10)),
@@ -76,10 +77,26 @@ class UpdateBookServiceTest {
     }
 
     @Test
-    @DisplayName("update throws BookNotFoundException when book is not found")
+    @DisplayName("update lança BookNotFoundException quando o livro não é encontrado")
     void updateThrowBookNotFoundExceptionWhenBookNotFound() {
         when(bookRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(BookNotFoundException.class, ()-> this.updateBookService.update(BookDTO.builder().build(), 1L));
+
+        verify(bookRepositoryMock, times(0)).save(any());
+    }
+
+    @Test
+    @DisplayName("update lança BookNotFoundException quando o isbn do livro atualizado já existia no livro salvo")
+    void updateThrowBookAlreadyIsbnExistExceptionWhenBookIsbnAlreadyExists() {
+        Book book = createBook().build();
+        Optional<Book> bookOptional = Optional.of(book);
+
+        when(bookRepositoryMock.findById(anyLong())).thenReturn(bookOptional);
+        when(bookRepositoryMock.existsByIsbnAndIdNot(bookOptional.get().getIsbn(), bookOptional.get().getId())).thenReturn(
+                Boolean.TRUE
+        );
+
+        assertThrows(BookAlreadyIsbnExistException.class, ()-> this.updateBookService.update(BookDTO.from(book), 1L));
 
         verify(bookRepositoryMock, times(0)).save(any());
     }

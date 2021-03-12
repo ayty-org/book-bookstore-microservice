@@ -42,7 +42,7 @@ class GetBookServiceTest {
     }
 
     @Test
-    @DisplayName("findById returns book when successful")
+    @DisplayName("findById  retorna o livro quando bem-sucedido")
     void findByIdReturnBookWhenSuccessful(){
 
         Book book = createBook().build(); //create a build to book
@@ -56,9 +56,9 @@ class GetBookServiceTest {
         //verification
         assertAll("Book",
                 ()-> assertThat(result.getTitle(), is("O Pequeno Príncipe")),
-                ()-> assertThat(result.getSinopse(), is("O Pequeno Príncipe representa a espontaneidade.")),
+                ()-> assertThat(result.getSynopsis(), is("O Pequeno Príncipe representa a espontaneidade.")),
                 ()-> assertThat(result.getIsbn(), is("978-3-16-148410-0")),
-                ()-> assertThat(result.getAutor(), is("Antoine de Saint")),
+                ()-> assertThat(result.getAuthor(), is("Antoine de Saint")),
                 ()-> assertThat(result.getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.getSellPrice(), is(10.00)),
                 ()-> assertThat(result.getQuantityAvailable(), is(2)),
@@ -69,7 +69,7 @@ class GetBookServiceTest {
     }
 
     @Test
-    @DisplayName("findById throws BookNotFoundException when book is not found")
+    @DisplayName("findById lança BookNotFoundException quando o livro não é encontrado")
     void findByIdBookThrowBookNotFoundExceptionWhenBookNotFound() {
 
         when(bookRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
