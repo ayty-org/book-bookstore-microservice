@@ -92,7 +92,7 @@ class UpdateBookServiceTest {
         Optional<Book> bookOptional = Optional.of(book);
 
         when(bookRepositoryMock.findById(anyLong())).thenReturn(bookOptional);
-        when(bookRepositoryMock.existsByIsbnAndIdNot(bookOptional.get().getIsbn(), bookOptional.get().getId())).thenReturn(
+        when(bookRepositoryMock.existsByIsbnAndId(bookOptional.get().getIsbn(), bookOptional.get().getId())).thenReturn(
                 Boolean.TRUE
         );
 
